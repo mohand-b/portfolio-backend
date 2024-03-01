@@ -1,3 +1,4 @@
 from django.contrib import admin
+from interviews.models import Question
 
-# Register your models here.
+admin.site.register(Question)

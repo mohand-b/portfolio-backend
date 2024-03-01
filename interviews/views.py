@@ -28,6 +28,18 @@ def get_question(request, unique_id):
 
 @api_view(['GET'])
 def get_answered_questions(request):
-    questions = Question.objects.exclude(response_or_reason__isnull=True).exclude(response_or_reason__exact='')
+    questions = Question.objects.filter(status='answered')
     serializer = QuestionSerializer(questions, many=True)
-    return Response(serializer.data)
+    data = convert_dict_keys_to_camel_case(serializer.data)
+    return Response(data)
+
+
+@api_view(['DELETE'])
+def delete_pending_question(request, pk):
+    try:
+        question = Question.objects.get(pk=pk, status='pending')
+    except Question.DoesNotExist:
+        return Response({'detail': 'Question not found or not in pending status.'}, status=status.HTTP_404_NOT_FOUND)
+
+    question.delete()
+    return Response({'detail': 'Question deleted successfully.'}, status=status.HTTP_204_NO_CONTENT)
