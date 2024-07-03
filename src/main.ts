@@ -3,8 +3,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalInterceptors();
   await app.listen(3000);
 }
 
-bootstrap();
+bootstrap().then(() => console.log('Server is running!'));
