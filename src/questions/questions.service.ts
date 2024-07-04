@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Question } from './question.entity';
@@ -55,6 +59,9 @@ export class QuestionsService {
 
   async answerQuestion(uniqueId: string, response: string): Promise<Question> {
     const question: Question = await this.findOne(uniqueId);
+    if (question.status !== QuestionStatus.PENDING) {
+      throw new BadRequestException('Only pending questions can be answered');
+    }
     question.status = QuestionStatus.ANSWERED;
     question.responseOrReason = response;
     return this.questionsRepository.save(question);
@@ -62,6 +69,9 @@ export class QuestionsService {
 
   async rejectQuestion(uniqueId: string, reason: string): Promise<Question> {
     const question: Question = await this.findOne(uniqueId);
+    if (question.status !== QuestionStatus.PENDING) {
+      throw new BadRequestException('Only pending questions can be rejected');
+    }
     question.status = QuestionStatus.REJECTED;
     question.responseOrReason = reason;
     return this.questionsRepository.save(question);
