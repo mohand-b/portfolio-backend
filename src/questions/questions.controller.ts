@@ -17,7 +17,7 @@ import { QuestionStatus } from './question-status.enum';
 export class QuestionsController {
   constructor(private readonly questionsService: QuestionsService) {}
 
-  @Post()
+  @Post('/submit')
   async create(
     @Body() createQuestionDto: CreateQuestionDto,
   ): Promise<Question> {
