@@ -4,6 +4,9 @@ import { QuestionsController } from './questions/questions.controller';
 import { QuestionsService } from './questions/questions.service';
 import { Question } from './questions/question.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ContactController } from './contact/contact.controller';
+import { ContactService } from './contact/contact.service';
+import { MailService } from './mail/mail.service';
 
 @Module({
   imports: [
@@ -27,7 +30,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
     TypeOrmModule.forFeature([Question]),
   ],
-  controllers: [QuestionsController],
-  providers: [QuestionsService],
+  controllers: [ContactController, QuestionsController],
+  providers: [ContactService, MailService, QuestionsService],
 })
 export class AppModule {}

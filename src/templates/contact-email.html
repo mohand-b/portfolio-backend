@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Nouveau message de contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #007bff;
+        }
+
+        .header {
+            color: #333333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .details {
+            margin: 20px 0;
+        }
+
+        .details p {
+            margin: 10px 0;
+        }
+
+        .details strong {
+            color: #007bff;
+        }
+
+        .message {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 5px solid #007bff;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="header">Nouveau message de contact</h2>
+    <p class="details">
+        <strong>Date:</strong> {{date}}<br>
+        <strong>Heure:</strong> {{time}}
+    </p>
+    <div class="details">
+        <p><strong>Nom:</strong> {{name}}</p>
+        <p><strong>Prénom:</strong> {{surname}}</p>
+        <p><strong>E-mail:</strong> {{email}}</p>
+        <p><strong>Sujet:</strong> {{subject}}</p>
+    </div>
+    <p><strong>Message:</strong></p>
+    <div class="message">
+        <p>{{message}}</p>
+    </div>
+    <div class="footer">
+        <p>Ce message provient du formulaire de contact de votre site <strong>mohandb.dev</strong>.</p>
+    </div>
+</div>
+</body>
+</html>
