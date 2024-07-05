@@ -19,13 +19,12 @@ import { MailService } from './mail/mail.service';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get<string>('DATABASE_HOST'),
-        port: configService.get<number>('DATABASE_PORT'),
-        username: configService.get<string>('DATABASE_USERNAME'),
-        password: configService.get<string>('DATABASE_PASSWORD'),
-        database: configService.get<string>('DATABASE_NAME'),
-        entities: [Question],
+        url: configService.get<string>('DATABASE_URL'),
+        autoLoadEntities: true,
         synchronize: true,
+        ssl: {
+          rejectUnauthorized: false,
+        },
       }),
     }),
     TypeOrmModule.forFeature([Question]),
